@@ -1,0 +1,37 @@
+{{ define "main" }}
+<div class="banner">
+  <div id="maintao-logo" class="shine-text">mainTao</div>
+</div>
+
+<div class="posts-wrapper">
+  <div class="posts">
+
+    {{ $largerYear := 9999 }}
+    {{ range .Site.RegularPages}}
+    {{ $year := .Date.Year}}
+
+    {{ if eq (sub $largerYear $year) 1 }}
+    <div class="year-split">
+      {{ $largerYear }}
+      <div class="line"></div>
+      {{ $year }}
+    </div>
+    {{ end }}
+    <div>
+      <span class="date">
+        {{ dateFormat "Jan 02" .Date }}
+      </span>
+      <a href="{{.Permalink}}">{{ .Title }}</a>
+    </div>
+
+    {{ $largerYear = .Date.Year }}
+    {{ end }}
+
+  </div>
+</div>
+{{ $elementId := "maintao-logo"}}
+{{ partial "shine-script.html" (dict "id" "maintao-logo") }}
+<div style="text-align: center;padding: 10px;">
+  <a style="color:#888;font-size: 12px;" target="_blank" href="https://beian.miit.gov.cn">京ICP备14007233号</a>
+</div>
+{{ end }}

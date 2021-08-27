@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+{{- partial "head.html" . -}}
+
+<body>
+    <div id="content">
+        {{- block "main" . }}{{- end }}
+    </div>
+</body>
+
+{{ range split .Params.bodyjs " " }}
+{{ if ne (trim . " ") "" }}
+<script src="/js/{{ . }}.js"></script>
+{{ end }}
+{{ end }}
+
+
+<script>
+    document.documentElement.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1) {
+            event.preventDefault();
+        }
+    }, false);
+
+    var lastTouchEnd = 0;
+    document.documentElement.addEventListener('touchend', function (event) {
+        var now = Date.now();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false);
+</script>
+
+</html>

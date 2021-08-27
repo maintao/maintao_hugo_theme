@@ -1,0 +1,9 @@
+baseURL = "https://maintao.com/"
+languageCode = "zh-cn"
+title = "闷道"
+theme = "maintao"
+
+disableKinds = ["RSS"]
+
+[markup.goldmark.renderer]
+unsafe = true
